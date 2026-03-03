@@ -2,6 +2,8 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Home } from './pages/Home';
 import { QuizPage } from './pages/games/QuizPage';
 import { NotFound } from './pages/NotFound';
+import { WouldYouRatherPage } from './pages/games/WouldYouRatherPage';
+import { PictionaryPage } from './pages/games/PictionaryPage';
 
 /**
  * GameHub — Multi-game platform
@@ -22,6 +24,8 @@ export default function App() {
 
         {/* ── Games ── */}
         <Route path="/games/quiz" element={<QuizPage />} />
+        <Route path="/games/would-you-rather" element={<WouldYouRatherPage />} />
+        <Route path="/games/pictionary" element={<PictionaryPage />} />
         {/* Add new game routes here */}
 
         <Route path="*" element={<NotFound />} />

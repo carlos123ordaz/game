@@ -17,19 +17,30 @@ export const GAMES: GameConfig[] = [
     color: '#6c5ce7',
     tags: ['parejas', 'amigos', '2 jugadores'],
   },
-  // ── Add more games here ──
-  // {
-  //   id: 'trivia',
-  //   name: 'Trivia Battle',
-  //   description: 'Compite contra otros en trivia de cultura general.',
-  //   emoji: '🧠',
-  //   minPlayers: 2,
-  //   maxPlayers: 6,
-  //   path: '/games/trivia',
-  //   namespace: '/trivia',
-  //   color: '#00cec9',
-  //   tags: ['multijugador', 'trivia'],
-  // },
+  {
+    id: 'would-you-rather',
+    name: '¿Qué Prefieres?',
+    emoji: '🤔',
+    description: 'Dilemas divertidos para descubrir qué tan parecidos piensan. Elige entre dos opciones y compara.',
+    path: '/games/would-you-rather',
+    namespace: '/would-you-rather',  // ← esto faltaba
+    minPlayers: 2,
+    maxPlayers: 2,
+    color: '#f97316',
+    tags: ['dilemas', 'pareja', 'amigos']
+  },
+  {
+    id: 'pictionary',
+    name: 'Pictionary',
+    emoji: '🎨',
+    description: 'Dibuja, adivina y diviértete. Elige una palabra, haz tu mejor dibujo y mira si te adivinan.',
+    path: '/games/pictionary',
+    namespace: '/pictionary',
+    minPlayers: 2,
+    maxPlayers: 8,
+    color: '#10b981',
+    tags: ['dibujo', 'multijugador', 'clásico']
+  }
 ];
 
 export function getGameById(id: string): GameConfig | undefined {
