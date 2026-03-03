@@ -65,6 +65,18 @@ export const GAMES: GameConfig[] = [
     color: '#ff6e6c',
     tags: ['tablero', 'busqueda', 'multijugador']
   },
+  {
+    id: "ludo",
+    name: "Ludo",
+    emoji: "🎲",
+    description: "El clasico juego de mesa. Lleva tus 4 fichas a casa antes que nadie.",
+    path: "/games/ludo",
+    namespace: "/ludo",
+    minPlayers: 2,
+    maxPlayers: 4,
+    color: "#fbbf24",
+    tags: ["clasico", "estrategia", "multijugador"]
+  }
 ];
 
 export function getGameById(id: string): GameConfig | undefined {
