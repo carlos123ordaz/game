@@ -21,7 +21,6 @@ export function WSGrid({
     foundWords,
     placements = [],
     playerId,
-    selecting,
     selectedCells,
     hint,
     onSelectionStart,
