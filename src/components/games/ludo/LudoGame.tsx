@@ -1,7 +1,6 @@
 /* File: src/components/games/ludo/LudoGame.tsx */
 import { useState, useEffect } from 'react';
-import { Button } from '../../common/Button';
-import type { LudoGameState, LudoColor, LudoMove } from '../../../types/games/ludo';
+import type { LudoGameState, LudoColor } from '../../../types/games/ludo';
 import { COLOR_MAP } from '../../../types/games/ludo';
 import { LudoBoard } from './LudoBoard';
 import { Dice3D } from './Dice3D';

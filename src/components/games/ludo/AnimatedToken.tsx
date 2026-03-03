@@ -1,5 +1,5 @@
 /* File: src/components/games/ludo/AnimatedToken.tsx */
-import { useEffect, useRef, useState, useCallback } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import type { LudoColor, BoardCell } from '../../../types/games/ludo';
 import { COLOR_MAP, getTokenCoords } from '../../../types/games/ludo';
 

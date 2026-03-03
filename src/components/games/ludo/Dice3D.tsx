@@ -1,5 +1,4 @@
 /* File: src/components/games/ludo/Dice3D.tsx */
-import { useEffect, useState } from 'react';
 
 interface Props {
     value: number | null;

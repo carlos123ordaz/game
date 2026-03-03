@@ -3,7 +3,7 @@ import { useMemo } from 'react';
 import type { LudoPlayer, LudoColor, LudoMove, BoardCell } from '../../../types/games/ludo';
 import {
     COLOR_MAP, MAIN_PATH, HOME_COLUMNS, BASE_POSITIONS,
-    SAFE_POSITIONS, START_POSITIONS, getTokenCoords, relativeToAbsolute,
+    SAFE_POSITIONS, START_POSITIONS, getTokenCoords,
 } from '../../../types/games/ludo';
 import { AnimatedToken } from './AnimatedToken';
 
@@ -33,14 +33,7 @@ function cellToPixel(cell: BoardCell): { x: number; y: number } {
 }
 
 export function LudoBoard({ players, playerId, selectableTokens, onSelectToken, validMoves, myColor }: Props) {
-    // Build set of path cells for rendering
-    const pathCellSet = useMemo(() => {
-        const set = new Set<string>();
-        MAIN_PATH.forEach(c => set.add(`${c.r}-${c.c}`));
-        Object.values(HOME_COLUMNS).forEach(col => col.forEach(c => set.add(`${c.r}-${c.c}`)));
-        set.add('7-7');
-        return set;
-    }, []);
+
 
     // Highlight cells for valid moves
     const highlightCells = useMemo(() => {

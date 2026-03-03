@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useReducer } from 'react';
 import { useSocket } from '../useSocket';
-import type { LudoPhase, LudoGameState, LudoColor, LudoPlayer, LudoMove, LudoEvent } from '../../types/games/ludo';
+import type { LudoPhase, LudoGameState, LudoColor } from '../../types/games/ludo';
 
 /* ===================================================================
    LUDO - useLudo Hook
