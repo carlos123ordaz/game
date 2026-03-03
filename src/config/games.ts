@@ -52,7 +52,19 @@ export const GAMES: GameConfig[] = [
     maxPlayers: 8,
     color: '#ff6e6c',
     tags: ['tablero', 'pixel art', 'estrategia', 'multijugador']
-  }
+  },
+  {
+    id: 'word-search',
+    name: 'Busca Palabras',
+    emoji: '🔎',
+    description: 'Encuentra palabras ocultas en una cuadrícula. ¡2-8 jugadores!',
+    path: '/games/word-search',
+    namespace: '/word-search',
+    minPlayers: 2,
+    maxPlayers: 8,
+    color: '#ff6e6c',
+    tags: ['tablero', 'busqueda', 'multijugador']
+  },
 ];
 
 export function getGameById(id: string): GameConfig | undefined {

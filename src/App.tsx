@@ -5,6 +5,7 @@ import { NotFound } from './pages/NotFound';
 import { WouldYouRatherPage } from './pages/games/WouldYouRatherPage';
 import { PictionaryPage } from './pages/games/PictionaryPage';
 import { PixelAdventurePage } from './pages/games/PixelAdventurePage';
+import { WordSearchPage } from './pages/games/WordSearchPage';
 
 /**
  * GameHub — Multi-game platform
@@ -28,6 +29,7 @@ export default function App() {
         <Route path="/games/would-you-rather" element={<WouldYouRatherPage />} />
         <Route path="/games/pictionary" element={<PictionaryPage />} />
         <Route path="/games/pixel-adventure" element={<PixelAdventurePage />} />
+        <Route path="/games/word-search" element={<WordSearchPage />} />
         {/* Add new game routes here */}
 
         <Route path="*" element={<NotFound />} />
