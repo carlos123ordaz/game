@@ -40,6 +40,18 @@ export const GAMES: GameConfig[] = [
     maxPlayers: 8,
     color: '#10b981',
     tags: ['dibujo', 'multijugador', 'clásico']
+  },
+  {
+    id: 'pixel-adventure',
+    name: 'Aventura Pixelada',
+    emoji: '👾',
+    description: 'Serpientes, escaleras, trampas, items y decisiones en un tablero pixel art. ¡2-8 jugadores!',
+    path: '/games/pixel-adventure',
+    namespace: '/pixel-adventure',
+    minPlayers: 2,
+    maxPlayers: 8,
+    color: '#ff6e6c',
+    tags: ['tablero', 'pixel art', 'estrategia', 'multijugador']
   }
 ];
 

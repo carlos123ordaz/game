@@ -4,6 +4,7 @@ import { QuizPage } from './pages/games/QuizPage';
 import { NotFound } from './pages/NotFound';
 import { WouldYouRatherPage } from './pages/games/WouldYouRatherPage';
 import { PictionaryPage } from './pages/games/PictionaryPage';
+import { PixelAdventurePage } from './pages/games/PixelAdventurePage';
 
 /**
  * GameHub — Multi-game platform
@@ -26,6 +27,7 @@ export default function App() {
         <Route path="/games/quiz" element={<QuizPage />} />
         <Route path="/games/would-you-rather" element={<WouldYouRatherPage />} />
         <Route path="/games/pictionary" element={<PictionaryPage />} />
+        <Route path="/games/pixel-adventure" element={<PixelAdventurePage />} />
         {/* Add new game routes here */}
 
         <Route path="*" element={<NotFound />} />
