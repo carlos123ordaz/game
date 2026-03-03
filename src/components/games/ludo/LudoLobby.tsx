@@ -1,6 +1,6 @@
 /* File: src/components/games/ludo/LudoLobby.tsx */
 import { Button } from '../../common/Button';
-import type { LudoPlayer, LudoColor } from '../../../types/games/ludo';
+import type { LudoPlayer } from '../../../types/games/ludo';
 import { COLOR_MAP } from '../../../types/games/ludo';
 
 interface Props {

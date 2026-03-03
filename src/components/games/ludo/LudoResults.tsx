@@ -1,6 +1,6 @@
 /* File: src/components/games/ludo/LudoResults.tsx */
 import { Button } from '../../common/Button';
-import type { LudoGameState, LudoColor } from '../../../types/games/ludo';
+import type { LudoGameState } from '../../../types/games/ludo';
 import { COLOR_MAP } from '../../../types/games/ludo';
 
 interface Props {
