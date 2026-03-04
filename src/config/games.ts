@@ -76,6 +76,18 @@ export const GAMES: GameConfig[] = [
     maxPlayers: 4,
     color: "#fbbf24",
     tags: ["clasico", "estrategia", "multijugador"]
+  },
+  {
+    id: 'minesweeper',
+    name: 'Buscaminas Competitivo',
+    emoji: '💣',
+    description: 'Despejen el mismo tablero compitiendo por puntos. Revela celdas, coloca banderas y no pises las minas.',
+    path: '/games/minesweeper',
+    namespace: '/minesweeper',
+    minPlayers: 2,
+    maxPlayers: 8,
+    color: '#0ea5e9',
+    tags: ['estrategia', 'competitivo', 'clásico', 'multijugador']
   }
 ];
 

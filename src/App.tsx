@@ -7,6 +7,7 @@ import { PictionaryPage } from './pages/games/PictionaryPage';
 import { PixelAdventurePage } from './pages/games/PixelAdventurePage';
 import { WordSearchPage } from './pages/games/WordSearchPage';
 import { LudoPage } from './pages/games/LudoPage';
+import { MinesweeperPage } from './pages/games/MinesweeperPage';
 
 /**
  * GameHub — Multi-game platform
@@ -32,6 +33,7 @@ export default function App() {
         <Route path="/games/pixel-adventure" element={<PixelAdventurePage />} />
         <Route path="/games/word-search" element={<WordSearchPage />} />
         <Route path="/games/ludo" element={<LudoPage />} />
+        <Route path='/games/minesweeper' element={<MinesweeperPage />} />
         {/* Add new game routes here */}
 
         <Route path="*" element={<NotFound />} />

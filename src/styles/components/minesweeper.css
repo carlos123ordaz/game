@@ -1,0 +1,972 @@
+/* ═══════════════════════════════════════════
+   MINESWEEPER — Competitive Theme
+   Color: Cyan/Teal (#0ea5e9)
+   ═══════════════════════════════════════════ */
+
+:root {
+  --ms-primary: #0ea5e9;
+  --ms-primary-glow: rgba(14, 165, 233, 0.3);
+  --ms-danger: #ef4444;
+  --ms-success: #22c55e;
+  --ms-warning: #f59e0b;
+
+  /* Cell number colors (classic minesweeper) */
+  --ms-num-1: #3b82f6;
+  --ms-num-2: #22c55e;
+  --ms-num-3: #ef4444;
+  --ms-num-4: #7c3aed;
+  --ms-num-5: #b91c1c;
+  --ms-num-6: #06b6d4;
+  --ms-num-7: #1f2937;
+  --ms-num-8: #6b7280;
+
+  /* Board theme */
+  --ms-cell-hidden: #1e293b;
+  --ms-cell-hidden-hover: #334155;
+  --ms-cell-revealed: #0f172a;
+  --ms-cell-revealed-border: rgba(14, 165, 233, 0.08);
+  --ms-cell-mine: rgba(239, 68, 68, 0.15);
+  --ms-cell-flag: rgba(245, 158, 11, 0.12);
+  --ms-grid-gap: 2px;
+}
+
+/* ═══════════════════════════════════════════
+   NAME ENTRY
+   ═══════════════════════════════════════════ */
+
+.ms-entry {
+  max-width: 440px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+  animation: ms-fadeUp 0.5s ease-out;
+}
+
+.ms-entry__header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.ms-entry__icon {
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
+  animation: ms-pulse 2s ease-in-out infinite;
+}
+
+.ms-entry__title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--text-primary, #f1f5f9);
+  letter-spacing: -0.02em;
+}
+
+.ms-entry__subtitle {
+  font-size: 0.875rem;
+  color: var(--ms-primary);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin-top: 0.25rem;
+}
+
+.ms-entry__form,
+.ms-entry__join {
+  margin-bottom: 1.5rem;
+}
+
+.ms-entry__label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-secondary, #94a3b8);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 0.5rem;
+}
+
+.ms-entry__input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
+  border: 1.5px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text-primary, #f1f5f9);
+  font-size: 1rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.ms-entry__input:focus {
+  border-color: var(--ms-primary);
+  box-shadow: 0 0 0 3px var(--ms-primary-glow);
+}
+
+.ms-entry__input--code {
+  text-align: center;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-size: 1.5rem;
+  letter-spacing: 0.3em;
+  font-weight: 700;
+}
+
+.ms-entry__difficulty {
+  margin-bottom: 1.5rem;
+}
+
+.ms-entry__diff-options {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.ms-entry__diff-btn {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.75rem 0.5rem;
+  border: 1.5px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.02);
+  color: var(--text-secondary, #94a3b8);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.ms-entry__diff-btn:hover {
+  border-color: rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.ms-entry__diff-btn--active {
+  border-color: var(--ms-primary);
+  background: var(--ms-primary-glow);
+  color: var(--text-primary, #f1f5f9);
+}
+
+.ms-entry__diff-emoji {
+  font-size: 1.25rem;
+}
+
+.ms-entry__diff-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.ms-entry__diff-desc {
+  font-size: 0.65rem;
+  opacity: 0.7;
+}
+
+.ms-entry__actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+/* ═══════════════════════════════════════════
+   LOBBY
+   ═══════════════════════════════════════════ */
+
+.ms-lobby {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+  animation: ms-fadeUp 0.4s ease-out;
+}
+
+.ms-lobby__header {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.ms-lobby__title {
+  font-size: 1.25rem;
+  color: var(--text-primary, #f1f5f9);
+  margin-bottom: 0.75rem;
+}
+
+.ms-lobby__code {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: rgba(14, 165, 233, 0.08);
+  border: 1px solid rgba(14, 165, 233, 0.2);
+  border-radius: 10px;
+}
+
+.ms-lobby__code-label {
+  font-size: 0.75rem;
+  color: var(--text-secondary, #94a3b8);
+}
+
+.ms-lobby__code-value {
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--ms-primary);
+  letter-spacing: 0.15em;
+}
+
+.ms-lobby__copy-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  opacity: 0.6;
+  transition: opacity 0.2s;
+  padding: 0.25rem;
+}
+
+.ms-lobby__copy-btn:hover {
+  opacity: 1;
+}
+
+.ms-lobby__difficulty {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.ms-lobby__diff-current {
+  font-size: 0.875rem;
+  color: var(--text-secondary, #94a3b8);
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.ms-lobby__diff-controls {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+.ms-lobby__diff-pill {
+  padding: 0.35rem 0.75rem;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.02);
+  color: var(--text-secondary, #94a3b8);
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.ms-lobby__diff-pill:hover {
+  border-color: var(--ms-primary);
+}
+
+.ms-lobby__diff-pill--active {
+  background: var(--ms-primary);
+  border-color: var(--ms-primary);
+  color: white;
+}
+
+.ms-lobby__players {
+  margin-bottom: 1.5rem;
+}
+
+.ms-lobby__players-header {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-secondary, #94a3b8);
+  margin-bottom: 0.75rem;
+  font-weight: 600;
+}
+
+.ms-lobby__player {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  margin-bottom: 0.5rem;
+  transition: all 0.2s;
+}
+
+.ms-lobby__player--you {
+  border-color: rgba(14, 165, 233, 0.2);
+  background: rgba(14, 165, 233, 0.05);
+}
+
+.ms-lobby__player-name {
+  color: var(--text-primary, #f1f5f9);
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.ms-lobby__host-badge {
+  font-size: 0.6rem;
+  padding: 0.1rem 0.4rem;
+  border-radius: 4px;
+  background: var(--ms-warning);
+  color: #000;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.ms-lobby__you-badge {
+  font-size: 0.6rem;
+  padding: 0.1rem 0.4rem;
+  border-radius: 4px;
+  background: var(--ms-primary);
+  color: white;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.ms-lobby__player-status {
+  font-size: 0.8rem;
+  color: var(--text-secondary, #94a3b8);
+}
+
+.ms-lobby__player-status--ready {
+  color: var(--ms-success);
+}
+
+.ms-lobby__actions {
+  text-align: center;
+}
+
+/* ═══════════════════════════════════════════
+   GAME — Main Layout
+   ═══════════════════════════════════════════ */
+
+.ms-game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  max-width: 100%;
+  animation: ms-fadeUp 0.4s ease-out;
+  position: relative;
+}
+
+/* HUD */
+.ms-game__hud {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  padding: 0.6rem 1.25rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.ms-game__hud-item {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.ms-game__hud-icon {
+  font-size: 1rem;
+}
+
+.ms-game__hud-value {
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--text-primary, #f1f5f9);
+}
+
+.ms-game__hud-timer--urgent .ms-game__hud-value {
+  color: var(--ms-danger);
+  animation: ms-blink 1s step-start infinite;
+}
+
+.ms-game__hud-lives {
+  display: flex;
+  gap: 0.15rem;
+  font-size: 0.9rem;
+}
+
+.ms-game__heart--dead {
+  opacity: 0.35;
+}
+
+/* Board wrapper */
+.ms-game__board-wrapper {
+  position: relative;
+  transition: filter 0.3s;
+}
+
+.ms-game__board-wrapper--disabled {
+  filter: brightness(0.5) saturate(0.5);
+  pointer-events: none;
+}
+
+/* Status Overlay */
+.ms-game__overlay {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 2rem 3rem;
+  border-radius: 16px;
+  text-align: center;
+  animation: ms-scaleIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  backdrop-filter: blur(12px);
+}
+
+.ms-game__overlay--eliminated {
+  background: rgba(239, 68, 68, 0.15);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.ms-game__overlay--cleared {
+  background: rgba(34, 197, 94, 0.15);
+  border: 1px solid rgba(34, 197, 94, 0.3);
+}
+
+.ms-game__overlay-icon {
+  font-size: 2.5rem;
+}
+
+.ms-game__overlay-text {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-primary, #f1f5f9);
+}
+
+.ms-game__overlay-sub {
+  font-size: 0.8rem;
+  color: var(--text-secondary, #94a3b8);
+}
+
+/* Progress */
+.ms-game__progress {
+  width: 100%;
+  max-width: 500px;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.ms-game__progress-track {
+  flex: 1;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.ms-game__progress-fill {
+  height: 100%;
+  background: var(--ms-primary);
+  border-radius: 3px;
+  transition: width 0.3s ease;
+}
+
+.ms-game__progress-text {
+  font-size: 0.75rem;
+  color: var(--text-secondary, #94a3b8);
+  white-space: nowrap;
+  min-width: 80px;
+  text-align: right;
+}
+
+/* Leaderboard (sidebar on desktop, bottom on mobile) */
+.ms-game__leaderboard {
+  width: 100%;
+  max-width: 500px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 10px;
+  padding: 0.75rem;
+}
+
+.ms-game__lb-title {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-secondary, #94a3b8);
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.ms-game__lb-player {
+  display: grid;
+  grid-template-columns: 28px 1fr 60px 80px 40px;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 0.5rem;
+  border-radius: 6px;
+  margin-bottom: 0.25rem;
+  font-size: 0.8rem;
+}
+
+.ms-game__lb-player--you {
+  background: rgba(14, 165, 233, 0.08);
+}
+
+.ms-game__lb-player--dead {
+  opacity: 0.5;
+}
+
+.ms-game__lb-player--cleared {
+  background: rgba(34, 197, 94, 0.08);
+}
+
+.ms-game__lb-rank {
+  color: var(--text-secondary, #94a3b8);
+  font-weight: 600;
+  font-size: 0.7rem;
+}
+
+.ms-game__lb-name {
+  color: var(--text-primary, #f1f5f9);
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ms-game__lb-score {
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-weight: 600;
+  color: var(--ms-primary);
+  text-align: right;
+}
+
+.ms-game__lb-bar {
+  height: 4px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.ms-game__lb-bar-fill {
+  height: 100%;
+  background: var(--ms-primary);
+  border-radius: 2px;
+  transition: width 0.5s ease;
+}
+
+.ms-game__lb-status {
+  font-size: 0.7rem;
+  text-align: center;
+}
+
+/* ═══════════════════════════════════════════
+   BOARD
+   ═══════════════════════════════════════════ */
+
+.ms-board {
+  user-select: none;
+  -webkit-user-select: none;
+  overflow: auto;
+  max-width: 100%;
+  max-height: 60vh;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(0, 0, 0, 0.2);
+  padding: 2px;
+}
+
+.ms-board__grid {
+  display: grid;
+  gap: var(--ms-grid-gap);
+}
+
+/* Cell sizes per difficulty */
+.ms-board--large .ms-cell {
+  width: 40px;
+  height: 40px;
+  font-size: 1.1rem;
+}
+
+.ms-board--medium .ms-cell {
+  width: 30px;
+  height: 30px;
+  font-size: 0.85rem;
+}
+
+.ms-board--small .ms-cell {
+  width: 24px;
+  height: 24px;
+  font-size: 0.7rem;
+}
+
+/* ═══════════════════════════════════════════
+   CELL
+   ═══════════════════════════════════════════ */
+
+.ms-cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background 0.1s, transform 0.1s;
+  position: relative;
+  padding: 0;
+  line-height: 1;
+}
+
+.ms-cell--hidden {
+  background: var(--ms-cell-hidden);
+  box-shadow: inset 1px 1px 0 rgba(255, 255, 255, 0.06), inset -1px -1px 0 rgba(0, 0, 0, 0.2);
+}
+
+.ms-cell--hidden:hover:not(:disabled) {
+  background: var(--ms-cell-hidden-hover);
+  transform: scale(1.05);
+}
+
+.ms-cell--hidden:active:not(:disabled) {
+  transform: scale(0.95);
+  box-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.ms-cell--revealed {
+  background: var(--ms-cell-revealed);
+  border: 1px solid var(--ms-cell-revealed-border);
+  cursor: default;
+}
+
+.ms-cell--empty {
+  background: rgba(15, 23, 42, 0.5);
+}
+
+.ms-cell--flagged {
+  background: var(--ms-cell-flag);
+  box-shadow: inset 1px 1px 0 rgba(245, 158, 11, 0.1);
+}
+
+.ms-cell--mine {
+  background: var(--ms-cell-mine);
+  cursor: default;
+  animation: ms-shake 0.4s ease-in-out;
+}
+
+.ms-cell__number {
+  font-weight: 800;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+.ms-cell__flag {
+  font-size: 0.85em;
+  animation: ms-pop 0.2s ease-out;
+}
+
+.ms-cell__mine {
+  font-size: 0.9em;
+  animation: ms-pop 0.3s ease-out;
+}
+
+/* ═══════════════════════════════════════════
+   RESULTS
+   ═══════════════════════════════════════════ */
+
+.ms-results {
+  max-width: 560px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+  animation: ms-fadeUp 0.5s ease-out;
+}
+
+.ms-results--loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+  gap: 1rem;
+  color: var(--text-secondary, #94a3b8);
+}
+
+.ms-results__spinner {
+  width: 36px;
+  height: 36px;
+  border: 3px solid rgba(14, 165, 233, 0.2);
+  border-top-color: var(--ms-primary);
+  border-radius: 50%;
+  animation: ms-spin 0.8s linear infinite;
+}
+
+.ms-results__header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.ms-results__trophy {
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
+  animation: ms-bounce 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.ms-results__winner-name {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-primary, #f1f5f9);
+}
+
+.ms-results__winner-score {
+  font-size: 1rem;
+  color: var(--ms-primary);
+  font-weight: 600;
+}
+
+.ms-results__meta {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+
+.ms-results__meta-item {
+  text-align: center;
+  padding: 0.75rem;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.ms-results__meta-label {
+  display: block;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-secondary, #94a3b8);
+  margin-bottom: 0.25rem;
+}
+
+.ms-results__meta-value {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-primary, #f1f5f9);
+}
+
+.ms-results__leaderboard {
+  margin-bottom: 2rem;
+}
+
+.ms-results__lb-title {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-secondary, #94a3b8);
+  margin-bottom: 0.75rem;
+  font-weight: 600;
+}
+
+.ms-results__player {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  margin-bottom: 0.5rem;
+  animation: ms-fadeUp 0.3s ease-out backwards;
+}
+
+.ms-results__player:nth-child(2) { animation-delay: 0.05s; }
+.ms-results__player:nth-child(3) { animation-delay: 0.1s; }
+.ms-results__player:nth-child(4) { animation-delay: 0.15s; }
+
+.ms-results__player--winner {
+  border-color: rgba(14, 165, 233, 0.3);
+  background: rgba(14, 165, 233, 0.06);
+}
+
+.ms-results__player-rank {
+  font-size: 1.25rem;
+  min-width: 32px;
+  text-align: center;
+}
+
+.ms-results__player-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.ms-results__player-name {
+  font-weight: 600;
+  color: var(--text-primary, #f1f5f9);
+  font-size: 0.9rem;
+}
+
+.ms-results__player-status {
+  font-size: 0.7rem;
+  color: var(--text-secondary, #94a3b8);
+  display: block;
+  margin-top: 0.15rem;
+}
+
+.ms-results__player-stats {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.ms-results__stat {
+  text-align: center;
+}
+
+.ms-results__stat-value {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-primary, #f1f5f9);
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+.ms-results__stat-label {
+  display: block;
+  font-size: 0.55rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-secondary, #94a3b8);
+  margin-top: 0.1rem;
+}
+
+.ms-results__actions {
+  text-align: center;
+}
+
+/* ═══════════════════════════════════════════
+   ANIMATIONS
+   ═══════════════════════════════════════════ */
+
+@keyframes ms-fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes ms-scaleIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+@keyframes ms-pop {
+  0% { transform: scale(0); }
+  70% { transform: scale(1.15); }
+  100% { transform: scale(1); }
+}
+
+@keyframes ms-shake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-4px); }
+  40% { transform: translateX(4px); }
+  60% { transform: translateX(-3px); }
+  80% { transform: translateX(2px); }
+}
+
+@keyframes ms-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+}
+
+@keyframes ms-blink {
+  50% { opacity: 0.4; }
+}
+
+@keyframes ms-spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes ms-bounce {
+  0% { transform: scale(0) rotate(-10deg); }
+  60% { transform: scale(1.15) rotate(5deg); }
+  100% { transform: scale(1) rotate(0deg); }
+}
+
+/* ═══════════════════════════════════════════
+   RESPONSIVE
+   ═══════════════════════════════════════════ */
+
+@media (max-width: 640px) {
+  .ms-board--large .ms-cell {
+    width: 34px;
+    height: 34px;
+  }
+
+  .ms-board--medium .ms-cell {
+    width: 22px;
+    height: 22px;
+    font-size: 0.7rem;
+  }
+
+  .ms-board--small .ms-cell {
+    width: 18px;
+    height: 18px;
+    font-size: 0.6rem;
+  }
+
+  .ms-game__hud {
+    gap: 0.75rem;
+    padding: 0.5rem 0.75rem;
+  }
+
+  .ms-game__lb-player {
+    grid-template-columns: 24px 1fr 50px 60px 32px;
+    gap: 0.25rem;
+    font-size: 0.7rem;
+  }
+
+  .ms-results__meta {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .ms-results__player-stats {
+    gap: 0.4rem;
+  }
+
+  .ms-results__stat-value {
+    font-size: 0.75rem;
+  }
+
+  .ms-results__player {
+    flex-wrap: wrap;
+  }
+
+  .ms-results__player-stats {
+    width: 100%;
+    justify-content: space-around;
+    padding-top: 0.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    margin-top: 0.25rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .ms-entry__diff-options {
+    flex-direction: column;
+  }
+
+  .ms-entry__diff-btn {
+    flex-direction: row;
+    gap: 0.5rem;
+    padding: 0.6rem 0.75rem;
+  }
+}
