@@ -88,6 +88,30 @@ export const GAMES: GameConfig[] = [
     maxPlayers: 8,
     color: '#0ea5e9',
     tags: ['estrategia', 'competitivo', 'clásico', 'multijugador']
+  },
+  {
+    id: 'puzzle',
+    name: 'Rompecabezas',
+    emoji: '🧩',
+    description: 'Compite armando el mismo rompecabezas. ¡El más rápido gana!',
+    path: '/games/puzzle',
+    namespace: '/puzzle',
+    minPlayers: 2,
+    maxPlayers: 2,
+    color: '#8b5cf6',
+    tags: ['competitivo', 'velocidad', '2 jugadores']
+  },
+  {
+    id: 'anonymous-questions',
+    name: 'Preguntas Anónimas',
+    emoji: '🎭',
+    description: 'Escribe preguntas en secreto, todos responden, y adivina quién preguntó qué. ¡El que más engaña gana!',
+    path: '/games/anonymous-questions',
+    namespace: '/anonymous-questions',
+    minPlayers: 2,
+    maxPlayers: 12,
+    color: '#f59e0b',
+    tags: ['social', 'anónimo', 'deducción', 'multijugador']
   }
 ];
 
