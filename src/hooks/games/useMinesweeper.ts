@@ -1,6 +1,5 @@
 import { useCallback, useEffect, useReducer, useRef } from 'react';
 import { useSocket } from '../useSocket';
-import type { Player } from '../../types/common';
 import type {
     Difficulty,
     MinesweeperPhase,
