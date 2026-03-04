@@ -57,7 +57,7 @@ export function PuzzleResults({ results, playerId, onPlayAgain }: PuzzleResultsP
 
             {/* Player comparison */}
             <div className="puzzle-results__comparison">
-                {results.players.map((player, i) => {
+                {results.players.map((player, _) => {
                     const isMe = player.id === playerId;
                     const isPlayerWinner = results.winner?.name === player.name;
 
